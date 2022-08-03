@@ -43,7 +43,7 @@
 					<div class="container">
 						<table>
 							<div class="text-center">
-							<h4><i class="fas fa-user"></i>&nbsp;Data Pegawai</h4>
+								<h4><i class="fas fa-user"></i>&nbsp;Data Pegawai</h4>
 							</div>
 							<tr>
 								<td>PIN</td>
@@ -65,11 +65,10 @@
 				<div class="def">
 					<div class="container">
 						<table>
-							<thead>
-								<div class="text-center">
+							<div class="text-center">
 								<h4><i class="fas fa-file-alt"></i>&nbsp;Data Absensi</h4>
 							</div>
-							</thead>
+							
 							<tbody>
 								<tr>
 									<td>Tanggal</td>
@@ -81,11 +80,11 @@
 								</tr>
 								<tr>
 									<td>Jdw. Masuk</td>
-									<td>: @ViewBag.jdMasuk</td>
+									<td>:  <span id="">@ViewBag.jdMasuk</span></td>
 								</tr>
 								<tr>
 									<td>Jdw. Pulang</td>
-									<td>: @ViewBag.jdPulang</td>
+									<td>: <span id=""> @ViewBag.jdPulang</span></td>
 								</tr>
 								<tr>
 									<td>Jam Masuk</td>
@@ -151,10 +150,10 @@
 			</div>
 		</div>
 		@<script src="~/Scripts/jquery-1.10.2.min.js"></script>@
-    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
-    <script src="~/Scripts/moment.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script>
+		<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+		<script src="~/Scripts/moment.min.js"></script>
+		<script src="~/Scripts/bootstrap.min.js"></script>
+		<script>
         //pake GPS java
         function test() {
             //alert('Get new location.');
@@ -168,92 +167,92 @@
         }
 
         function cekin() {
-            punch(2);
+        	punch(2);
         }
 
         function cekot() {
-            punch(3);
+        	punch(3);
         }
 
-		function punch(flag) {
-            var y = document.getElementById("demo2");
+        function punch(flag) {
+        	var y = document.getElementById("demo2");
 			//var msg = confirm('Dapatkan lokasi baru?');
 			//if(msg){
 				var data = jsinterface.ShowMessage();
 				var myj = JSON.parse(data);
-                var lat = myj['Latitude'];
-                var lont = myj['Longitude'];
+				var lat = myj['Latitude'];
+				var lont = myj['Longitude'];
 
-                $.ajax({
-                url: '@Url.Action("Cek", "Personal", new { area = "" })',
-                type: 'POST',
-                data: { lat: lat, lont: lont, flag: flag },
-                success: function (result) {
-                    if (result.sukses) {
-                        $('#latitude').val(lat);
-                        $('#longitude').val(lont);
-                        $('#jarak').val(result.jarak);
-                        $('#lbljam').text(result.jam);
-                        if (flag == 2) {
-                            $('#jmsk').text(result.jam);
-                        } else {
-                            $('#jplg').text(result.jam);
-                        }
-                    } else {
+				$.ajax({
+					url: '@Url.Action("Cek", "Personal", new { area = "" })',
+					type: 'POST',
+					data: { lat: lat, lont: lont, flag: flag },
+					success: function (result) {
+						if (result.sukses) {
+							$('#latitude').val(lat);
+							$('#longitude').val(lont);
+							$('#jarak').val(result.jarak);
+							$('#lbljam').text(result.jam);
+							if (flag == 2) {
+								$('#jmsk').text(result.jam);
+							} else {
+								$('#jplg').text(result.jam);
+							}
+						} else {
 
-                    }
-                    y.innerHTML = result.area;
-                },
-                error: function(xhr, error, status) {
-                    ShowMessage(error, status);
-                }
-            });
+						}
+						y.innerHTML = result.area;
+					},
+					error: function(xhr, error, status) {
+						ShowMessage(error, status);
+					}
+				});
 			//}
-            $("#myModal").modal('hide');
-        }
+			$("#myModal").modal('hide');
+		}
 
-        function modal() {
-            $("#myModal").modal('show');
-        }
+		function modal() {
+			$("#myModal").modal('show');
+		}
 
-        @*var x = document.getElementById("demo");
-        function getLocation() {
-          if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
-          } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
-          }
-        }
+		@*var x = document.getElementById("demo");
+		function getLocation() {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(showPosition, showError);
+			} else {
+				x.innerHTML = "Geolocation is not supported by this browser.";
+			}
+		}
 
-        function showPosition(position) {
-          x.innerHTML = "Latitude: " + position.coords.latitude +
-          "<br>Longitude: " + position.coords.longitude;
-        }
+		function showPosition(position) {
+			x.innerHTML = "Latitude: " + position.coords.latitude +
+			"<br>Longitude: " + position.coords.longitude;
+		}
 
-        function showError(error) {
-          switch(error.code) {
-            case error.PERMISSION_DENIED:
-              x.innerHTML = "User denied the request for Geolocation."
-              break;
-            case error.POSITION_UNAVAILABLE:
-              x.innerHTML = "Location information is unavailable."
-              break;
-            case error.TIMEOUT:
-              x.innerHTML = "The request to get user location timed out."
-              break;
-            case error.UNKNOWN_ERROR:
-              x.innerHTML = "An unknown error occurred."
-              break;
-          }
-        }*@
-    </script>
-		</section>
+		function showError(error) {
+			switch(error.code) {
+				case error.PERMISSION_DENIED:
+				x.innerHTML = "User denied the request for Geolocation."
+				break;
+				case error.POSITION_UNAVAILABLE:
+				x.innerHTML = "Location information is unavailable."
+				break;
+				case error.TIMEOUT:
+				x.innerHTML = "The request to get user location timed out."
+				break;
+				case error.UNKNOWN_ERROR:
+				x.innerHTML = "An unknown error occurred."
+				break;
+			}
+		}*@
+	</script>
+</section>
 
-		<div class="send-container">
-			<footer>
-				<p>Copyright &copy; 2022 ATi Creative<br>All Rights Reserved.</p>
-			</footer>
-		</div>
-	</form>
+<div class="send-container">
+	<footer>
+		<p>Copyright &copy; 2022 ATi Creative<br>All Rights Reserved.</p>
+	</footer>
+</div>
+</form>
 </body>
 </html>
