@@ -55,6 +55,11 @@ form section.left {
 	background: #D2B48C;
 }
 
+.p
+{
+	position: center;
+}
+
 body
 {
 
@@ -75,6 +80,7 @@ form section.right {
 form section .input-container {
 	padding: 10px;
 }
+
 form section .input-container label {
 	display: block;
 	margin-bottom: 4px;
